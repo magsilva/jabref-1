@@ -1,17 +1,4 @@
 open module org.jabref {
-    exports org.jabref;
-
-    exports org.jabref.gui;
-    exports org.jabref.gui.logging;
-    exports org.jabref.gui.maintable;
-    exports org.jabref.gui.specialfields;
-
-    exports org.jabref.model.database;
-
-    exports org.jabref.logic;
-    exports org.jabref.logic.citationstyle;
-    exports org.jabref.logic.search;
-
     // Swing
     requires java.desktop;
 
@@ -19,6 +6,7 @@ open module org.jabref {
     requires java.sql;
 
     // JavaFX
+    requires javafx.base;
     requires javafx.graphics;
     requires javafx.swing;
     requires javafx.controls;
@@ -30,10 +18,10 @@ open module org.jabref {
     requires de.jensd.fx.fontawesomefx.commons;
     requires de.jensd.fx.fontawesomefx.materialdesignicons;
     requires org.controlsfx.controls;
+    requires org.fxmisc.richtext;
 
     provides com.airhacks.afterburner.views.ResourceLocator
             with org.jabref.gui.util.JabRefResourceLocator;
-
     provides com.airhacks.afterburner.injection.PresenterFactory
             with org.jabref.gui.DefaultInjector;
 
@@ -41,7 +29,10 @@ open module org.jabref {
     requires org.slf4j;
     requires org.apache.logging.log4j;
     requires org.apache.logging.log4j.core;
+    requires org.apache.logging.log4j.plugins;
     requires applicationinsights.logging.log4j2;
+    provides org.apache.logging.log4j.plugins.processor.PluginService
+            with org.jabref.gui.logging.plugins.Log4jPlugins;
 
     // Preferences and XML
     requires java.prefs;
@@ -62,14 +53,39 @@ open module org.jabref {
     requires com.google.common;
     requires easybind;
     requires jakarta.inject;
-    requires pdfbox;
+    requires org.apache.pdfbox;
     requires reactfx;
     requires commons.cli;
-    requires httpclient;
     requires com.github.tomtung.latex2unicode;
     requires jbibtex;
     requires citeproc.java;
     requires antlr.runtime;
-    requires commons.lang3;
-    requires xmpbox;
+    requires org.graalvm.truffle;
+    requires org.graalvm.sdk;
+    requires transitive org.graalvm.js;
+    requires java.scripting;
+    requires jdk.internal.vm.compiler;
+    requires org.apache.xmpbox;
+    requires de.saxsys.mvvmfx.validation;
+    requires com.google.gson;
+    requires unirest.java;
+    requires org.apache.httpcomponents.httpclient;
+    requires org.jsoup;
+    requires commons.csv;
+    requires io.github.javadiffutils;
+    requires java.string.similarity;
+    requires ojdbc10;
+    requires org.postgresql.jdbc;
+    requires org.mariadb.jdbc;
+    uses org.mariadb.jdbc.credential.CredentialPlugin;
+    requires org.apache.commons.lang3;
+    requires org.antlr.antlr4.runtime;
+    requires flowless;
+    requires org.apache.tika.core;
+
+    requires flexmark;
+    requires flexmark.ext.gfm.strikethrough;
+    requires flexmark.ext.gfm.tasklist;
+    requires flexmark.util.ast;
+    requires flexmark.util.data;
 }
